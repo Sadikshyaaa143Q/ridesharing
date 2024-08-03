@@ -7,6 +7,7 @@
 #include<QFileInfo>
 #include <QMessageBox>
 #include <QCoreApplication>
+#include "viewrequests.h"
 namespace Ui {
 class login_rider;
 }
@@ -26,6 +27,7 @@ private slots:
 
 private:
     Ui::login_rider *ui;
+    viewrequests *viewrequestsWindow;
      QSqlDatabase db;
 };
 

@@ -1,9 +1,10 @@
 #include "login_rider.h"
 #include "ui_login_rider.h"
-
+#include "viewrequests.h"
 login_rider::login_rider(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::login_rider)
+    , viewrequestsWindow(nullptr)
 {
     ui->setupUi(this);
 }
@@ -12,6 +13,13 @@ login_rider::~login_rider()
 {
     delete ui;
 }
+
+
+void login_rider::on_pushButton_2_clicked()
+{
+   QCoreApplication::quit();
+}
+
 
 void login_rider::on_pushButton_clicked()
 {
@@ -46,16 +54,16 @@ void login_rider::on_pushButton_clicked()
     if (query.next() && query.value(0).toInt() > 0) {
         QMessageBox::information(this, "Success", "Login successful.");
         // Proceed to the next step, e.g., open the main window
-    } else {
+        // if (!viewrequestsWindow){
+        //     viewrequestsWindow = new viewRequests(viewrequestsWindow);
+        // }
+        // viewrequestsWindow-> show();
+        // this->hide();
+    }
+    else {
         QMessageBox::warning(this, "Failure", "Invalid phone number or pin.");
     }
 }
 
 
-
-
-void login_rider::on_pushButton_2_clicked()
-{
-      QCoreApplication::quit();
-}
 

@@ -53,6 +53,26 @@ int main(int argc, char *argv[])
         qDebug () << "error creating table";
     }
     db.close();
+    db =QSqlDatabase :: addDatabase ("QSQLITE");
+    db.setDatabaseName("C:/sqlite/db.sqlite");
+
+    if(!db.open ()){
+
+        qDebug() << "problem opening database";
+    }
+    qDebug() << "end";
+    QString query2="CREATE TABLE IF NOT EXISTS messages ("
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    "phonenumber TEXT, "
+                    "message TEXT, "
+                    "timestamp DATETIME DEFAULT CURRENT_TIMESTAMP"
+                     ");";
+    QSqlQuery qry2;
+    if(!qry2.exec (query2))
+    {
+        qDebug () << "error creating table";
+    }
+    db.close();
     qDebug () << "end";
     Login w;
     w.show();

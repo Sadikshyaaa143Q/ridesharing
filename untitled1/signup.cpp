@@ -85,7 +85,7 @@ void Login::on_pushButton_clicked()
             loginWindow = new login(this);
         }
         loginWindow->show();
-        this->hide(); // Hide the sign-in window
+        //this->hide(); // Hide the sign-in window
     }
     }
 
@@ -148,7 +148,7 @@ void Login::on_pushButton_3_clicked()
                 login_riderWindow = new login_rider(this);
             }
             login_riderWindow->show();
-            this->hide(); // Hide the sign-in window
+            //this->hide(); // Hide the sign-in window
         }
     }
 

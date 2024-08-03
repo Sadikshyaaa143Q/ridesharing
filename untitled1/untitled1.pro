@@ -9,6 +9,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    chat.cpp \
     destination.cpp \
     login.cpp \
     login_rider.cpp \
@@ -16,12 +17,14 @@ SOURCES += \
     signup.cpp
 
 HEADERS += \
+    chat.h \
     destination.h \
     login.h \
     login_rider.h \
     signup.h
 
 FORMS += \
+    chat.ui \
     destination.ui \
     login.ui \
     login_rider.ui \

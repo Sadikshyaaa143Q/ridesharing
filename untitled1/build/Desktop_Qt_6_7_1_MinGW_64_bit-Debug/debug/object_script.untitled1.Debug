@@ -1,0 +1,11 @@
+debug/chat.o
+debug/destination.o
+debug/login.o
+debug/login_rider.o
+debug/main.o
+debug/signup.o
+debug/moc_chat.o
+debug/moc_destination.o
+debug/moc_login.o
+debug/moc_login_rider.o
+debug/moc_signup.o

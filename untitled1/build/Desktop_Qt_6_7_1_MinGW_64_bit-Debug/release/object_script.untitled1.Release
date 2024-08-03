@@ -1,0 +1,11 @@
+release/chat.o
+release/destination.o
+release/login.o
+release/login_rider.o
+release/main.o
+release/signup.o
+release/moc_chat.o
+release/moc_destination.o
+release/moc_login.o
+release/moc_login_rider.o
+release/moc_signup.o

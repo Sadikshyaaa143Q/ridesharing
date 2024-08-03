@@ -56,7 +56,7 @@ void login::on_pushButton_clicked()
             }
             destinationWindow->setCurrentPhoneNumber(Phonenumber); // Pass the phone number
             destinationWindow->show();
-            this->hide(); // Optional: Hide the login window
+            //this->hide(); // Optional: Hide the login window
         } else {
             QMessageBox::warning(this, "Failure", "Invalid phone number or pin.");
         }

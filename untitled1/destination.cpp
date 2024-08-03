@@ -1,9 +1,11 @@
 #include "destination.h"
 #include "ui_destination.h"
+#include "chat.h"
 
 destination::destination(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::destination)
+    , ui(new Ui::destination),
+    chatWindow(nullptr)
 {
     ui->setupUi(this);
 }
@@ -11,9 +13,45 @@ destination::destination(QWidget *parent)
 destination::~destination()
 {
     delete ui;
+    if (chatWindow) {
+        delete chatWindow;
+    }
 }
 void destination::setCurrentPhoneNumber(const QString &phoneNumber) {
     currentPhoneNumber = phoneNumber;
+}
+void destination::checkUserStatus() {
+    // Ensure the database is open
+    if (!db.isOpen()) {
+        db = QSqlDatabase::addDatabase("QSQLITE");
+        db.setDatabaseName("C:/sqlite/db.sqlite");
+        if (!db.open()) {
+            QMessageBox::critical(this, "Error", "Failed to connect to the database.");
+            return;
+        }
+    }
+
+    // Prepare the query to check the user's status
+    QSqlQuery query;
+    query.prepare("SELECT status FROM user WHERE phonenumber = :phonenumber");
+    query.bindValue(":phonenumber", currentPhoneNumber);
+
+    // Execute the query
+    if (!query.exec()) {
+        QMessageBox::critical(this, "Error", "Failed to query the database.");
+        qDebug() << "Error executing query: " << query.lastError();
+        return;
+    }
+
+    // Check the status
+    if (query.next()) {
+        QString status = query.value(0).toString();
+        if (status == "on hold") {
+            QMessageBox::information(this, "Ride Status", "Hey, your ride is accepted.");
+        }
+    }else {
+        QMessageBox::critical(this, "Error", "User not found.");
+    }
 }
 void destination::on_pushButton_clicked()
 {
@@ -45,7 +83,16 @@ void destination::on_pushButton_clicked()
         }
 
         QMessageBox::information(this, "Success", "Locations saved successfully.");
-    }
+        checkUserStatus();
+
+        if (!chatWindow) {
+            chatWindow = new chat(this);
+            chatWindow->setCurrentPhoneNumber(currentPhoneNumber);
+        }
+        chatWindow->show();
+        this->hide();
+}
+
 
 
 

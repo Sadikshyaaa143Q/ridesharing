@@ -11,6 +11,7 @@
 namespace Ui {
 class destination;
 }
+class chat;
 class destination : public QMainWindow
 {
     Q_OBJECT
@@ -28,11 +29,13 @@ private slots:
 private:
     Ui::destination *ui;
     QSqlDatabase db;
+    chat *chatWindow;
     QString currentPhoneNumber;  // Store the current user's phone number
 
 public:
-    void setCurrentPhoneNumber(const QString &phoneNumber);  // Method to set the current user's phone number
-};
+    void setCurrentPhoneNumber(const QString &phoneNumber);// Method to set the current user's phone number
 
+    void checkUserStatus();
+};
 
 #endif // DESTINATION_H
